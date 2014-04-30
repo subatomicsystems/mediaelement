@@ -456,7 +456,7 @@ if (typeof jQuery != 'undefined') {
 			t.killControlsTimer('start');
 
 			t.controlsTimer = setTimeout(function() {
-				//
+				//console.log('timer fired');
 				t.hideControls();
 				t.killControlsTimer('hide');
 			}, timeout);
@@ -532,8 +532,8 @@ if (typeof jQuery != 'undefined') {
 						} catch (e) {
 							// TODO: report control error
 							//throw e;
-							
-							
+							console.log('error building ' + feature);
+							console.log(e);
 						}
 					}
 				}
@@ -553,25 +553,25 @@ if (typeof jQuery != 'undefined') {
 						// for touch devices (iOS, Android)
 						// show/hide without animation on touch
 
-						t.$media.bind('touchstart', function() {
+						// t.$media.bind('touchstart', function() {
 
 
-							// toggle controls
-							if (t.controlsAreVisible) {
-								t.hideControls(false);
-							} else {
-								if (t.controlsEnabled) {
-									t.showControls(false);
-								}
-							}
-						});
+						// 	// toggle controls
+						// 	if (t.controlsAreVisible) {
+						// 		t.hideControls(false);
+						// 	} else {
+						// 		if (t.controlsEnabled) {
+						// 			t.showControls(false);
+						// 		}
+						// 	}
+						// });
 
 					} else {
 
 						// create callback here since it needs access to current
 						// MediaElement object
 						t.clickToPlayPauseCallback = function() {
-							//
+							//console.log('media clicked', t.media, t.media.paused);
 
 							if (t.options.clickToPlayPause) {
 								if (t.media.paused) {
@@ -838,7 +838,7 @@ if (typeof jQuery != 'undefined') {
 				others = rail.siblings(),
 				lastControl = others.last(),
 				lastControlPosition = null;
-				
+
 			// skip calculation if hidden
 			if (!t.container.is(':visible') || !rail.length || !rail.is(':visible')) {
 				return;
@@ -866,22 +866,22 @@ if (typeof jQuery != 'undefined') {
 				// fit the rail into the remaining space
 				railWidth = t.controls.width() - usedWidth - (rail.outerWidth(true) - rail.width());
 			}
-			
+
 			// resize the rail,
 			// but then check if the last control (say, the fullscreen button) got pushed down
 			// this often happens when zoomed
-			do {				
+			do {
 				// outer area
 				rail.width(railWidth);
 				// dark space
-				total.width(railWidth - (total.outerWidth(true) - total.width()));				
-				
+				total.width(railWidth - (total.outerWidth(true) - total.width()));
+
 				if (lastControl.css('position') != 'absolute') {
-					lastControlPosition = lastControl.position();				
-					railWidth--;			
+					lastControlPosition = lastControl.position();
+					railWidth--;
 				}
 			} while (lastControlPosition != null && lastControlPosition.top > 0 && railWidth > 0);
-			
+
 			if (t.setProgressRail)
 				t.setProgressRail();
 			if (t.setCurrentRail)
@@ -1137,8 +1137,8 @@ if (typeof jQuery != 'undefined') {
 					} catch (e) {
 						// TODO: report control error
 						//throw e;
-						//
-						//
+						//console.log('error building ' + feature);
+						//console.log(e);
 					}
 				}
 			}
@@ -1900,7 +1900,7 @@ if (typeof jQuery != 'undefined') {
 							return !!supports;
 						})();
 
-					//
+					//console.log('supportsPointerEvents', supportsPointerEvents);
 
 					if (supportsPointerEvents && !mejs.MediaFeatures.isOpera) { // opera doesn't allow this :(
 
@@ -2666,7 +2666,7 @@ if (typeof jQuery != 'undefined') {
 			
 				if (!img.is(':visible') && !img.is(':animated')) {
 				
-					//			
+					//console.log('showing existing slide');			
 					
 					img.fadeIn()
 						.siblings(':visible')
@@ -3053,7 +3053,7 @@ $.extend(mejs.MepDefaults,
 			});	
 			player.contextMenu.bind('mouseleave', function() {
 
-				//
+				//console.log('context hover out');
 				player.startContextMenuTimer();
 				
 			});		
@@ -3073,7 +3073,7 @@ $.extend(mejs.MepDefaults,
 		
 		contextMenuTimeout: null,
 		startContextMenuTimer: function() {
-			//
+			//console.log('startContextMenuTimer');
 			
 			var t = this;
 			
@@ -3087,7 +3087,7 @@ $.extend(mejs.MepDefaults,
 		killContextMenuTimer: function() {
 			var timer = this.contextMenuTimer;
 			
-			//
+			//console.log('killContextMenuTimer', timer);
 			
 			if (timer != null) {				
 				clearTimeout(timer);
