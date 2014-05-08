@@ -245,6 +245,7 @@
 			} else if (mf.isAndroid && t.options.AndroidUseNativeControls) {
 
 				// leave default player
+				t.$media.attr('controls', 'controls');
 
 			} else {
 
